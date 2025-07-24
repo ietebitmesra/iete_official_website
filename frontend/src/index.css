@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Apply Lexend Tera font globally with much tighter spacing to match reference image */
+body {
+  font-family: 'Lexend Tera', sans-serif;
+  letter-spacing: -0.08em; /* Much tighter letter spacing */
+  line-height: 1.1; /* Very tight line height */
+}
+
+/* Additional spacing adjustments for headings - very tight like the reference */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.12em; /* Very tight for headings to match image */
+  line-height: 0.9; /* Extremely tight line height */
+}
+
+/* Simple, clean animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply smooth animations */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Clean glass effect - much more subtle */
+.glass-effect {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
