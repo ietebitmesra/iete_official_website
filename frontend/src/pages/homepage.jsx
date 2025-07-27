@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import About from '../components/About';
+import Events from '../components/Events';
 export default function HomePage() {
   // State to track loading of the Spline scene
   const [isSplineLoaded, setIsSplineLoaded] = useState(false);
@@ -15,6 +16,7 @@ export default function HomePage() {
   }, []);
 
   return (
+        <>
     <section id="home" className="relative h-screen flex flex-col overflow-hidden">
       {/* Spline Background Container */}
       <div className="absolute inset-0 z-0">
@@ -28,7 +30,7 @@ export default function HomePage() {
           loading="eager"
           allow="pointer-lock; camera; microphone; autoplay"
           onLoad={() => setIsSplineLoaded(true)}
-        ></iframe>
+          ></iframe>
         
         {/* Loading overlay that disappears when Spline is loaded */}
         {!isSplineLoaded && (
@@ -51,7 +53,7 @@ export default function HomePage() {
                   src="/path/to/iete-logo.png" 
                   alt="IETE Logo" 
                   className="h-16 md:h-20 lg:h-24 w-auto"
-                />
+                  />
               </div>
               
               {/* Main Title */}
@@ -91,5 +93,8 @@ export default function HomePage() {
         </div>
       </div>
     </section>
+        <About/>
+        <Events />
+       </>
   );
 }
