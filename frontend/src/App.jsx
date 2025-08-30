@@ -24,7 +24,8 @@ export default function App() {
           <div className="flex space-x-12">
             <NavItem href="#home">Home</NavItem>
             <NavItem href="#events">Events</NavItem>
-            <NavItem href="#archives">Archives</NavItem>
+            <NavItem href="#team">Team</NavItem>
+            <NavItem href="#alumni">Alumni</NavItem>
             <NavItem href="#resources">Resources</NavItem>
           </div>
 
