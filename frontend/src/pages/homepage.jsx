@@ -50,10 +50,10 @@ export default function HomePage() {
               {/* IETE Logo */}
               <div className="mb-6">
                 <img 
-                  src="/path/to/iete-logo.png" 
+                  src="public/logo.png" 
                   alt="IETE Logo" 
-                  className="h-16 md:h-20 lg:h-24 w-auto"
-                  />
+                  className="h-42 md:h-56 lg:h-64 w-auto"
+                />
               </div>
               
               {/* Main Title */}

@@ -2,7 +2,7 @@
 
 This is the official website for the IETE (Institution of Electronics and Telecommunication Engineers) Student's Chapter at BIT Mesra.
 
-![IETE Logo](public/images/iete-logo.png)
+![IETE Logo](public/logo.png)
 
 ## 🚀 Features
 
