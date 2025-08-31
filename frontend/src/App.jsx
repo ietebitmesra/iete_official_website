@@ -6,6 +6,7 @@ import Events from './components/Events';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Team from './pages/team';
+import Alumni from './pages/Alumni';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<Events />} />
         <Route path="/team" element={<Team />} />
+        <Route path="/alumni" element={<Alumni />} />
       </Routes>
       <Footer />
     </div>

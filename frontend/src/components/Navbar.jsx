@@ -17,7 +17,8 @@ const navLinks = [
   { to: "/events", name: "Events" },
   { to: "/archives", name: "Archives" },
   { to: "/resources", name: "Resources" },
-  { to: "/team", name: "Team" }
+  { to: "/team", name: "Team" },
+  { to: "/alumni", name: "Alumni" }
 ];
 
 export default function Navbar() {
