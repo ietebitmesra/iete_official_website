@@ -166,7 +166,7 @@ const teamData = {
       role: "WebMaster",
       image: dhanay,
       email: "mailto:btech10581.23@bitmesra.ac.in",
-      instagram: "",
+      instagram: "https://www.instagram.com/dhanay_patil_/",
       linkedin: "http://www.linkedin.com/in/dhanaypatil"
     }, 
 
