@@ -2,6 +2,14 @@ import React, { useState, useMemo } from 'react';
 import { Calendar, MapPin, Search, Star, ArrowRight, GraduationCap, Eye, X } from '../components/Icons';
 
 
+function formatDate(dateStr) {
+  const d = new Date(dateStr);
+  const day = String(d.getDate()).padStart(2, '0');
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const year = d.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
 const events = [
   {
     id: 1,
@@ -131,7 +139,7 @@ export default function Events() {
                   <div className="space-y-4 bg-white/5 backdrop-blur-xl rounded-xl p-6">
                     <div className="flex items-center gap-3 text-gray-300">
                       <Calendar className="w-5 h-5 text-cyan-400" />
-                      <span>{new Date(selectedEvent.date).toLocaleDateString()} at {selectedEvent.time}</span>
+                      <span>{formatDate(selectedEvent.date)} at {selectedEvent.time}</span>
                     </div>
                     <div className="flex items-center gap-3 text-gray-300">
                       <MapPin className="w-5 h-5 text-emerald-400" />
@@ -246,7 +254,7 @@ export default function Events() {
                     </h3>
                     <div className="space-y-4 mb-8">
                       <div className="flex items-center gap-3 text-gray-300">
-                        <span className="text-base">{new Date(event.date).toLocaleDateString()} at {event.time}</span>
+                        <span className="text-base">{formatDate(event.date)} at {event.time}</span>
                       </div>
                       <div className="flex items-center gap-3 text-gray-300">
                         <MapPin className="w-5 h-5 text-emerald-400" />
@@ -314,7 +322,7 @@ export default function Events() {
                   <div className="space-y-4 mb-8">
                     <div className="flex items-center gap-3 text-gray-300">
                       <Calendar className="w-5 h-5 text-cyan-400" />
-                      <span className="text-base">{new Date(event.date).toLocaleDateString()} at {event.time}</span>
+                      <span className="text-base">{formatDate(event.date)} at {event.time}</span>
                     </div>
                     <div className="flex items-center gap-3 text-gray-300">
                       <MapPin className="w-5 h-5 text-emerald-400" />
