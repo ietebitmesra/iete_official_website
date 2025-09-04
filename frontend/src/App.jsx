@@ -1,70 +1,27 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/homepage';
-import Events from './pages/events';
 
-// Helper component for Navigation Items
-function NavItem({ href, children }) {
-  return (
-    <a 
-      href={href} 
-      className="text-white font-normal text-base hover:text-gray-300 transition-colors duration-200"
-    >
-      {children}
-    </a>
-  );
-}
+import About from './components/About';
+import Events from './components/Events';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Team from './pages/team';
+import Alumni from './pages/Alumni';
 
-// Main App component
+
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-8 py-6">
-        <div className="flex justify-between items-center">
-          {/* Left Side - Navigation Links */}
-          <div className="flex space-x-12">
-            <NavItem href="#home">Home</NavItem>
-            <NavItem href="#events">Events</NavItem>
-            <NavItem href="#archives">Archives</NavItem>
-            <NavItem href="#resources">Resources</NavItem>
-          </div>
-
-          {/* Right Side - Register Button */}
-          <button className="px-6 py-2 border border-white text-white rounded-full font-normal text-base hover:bg-white hover:text-black transition-all duration-200">
-            Register!
-          </button>
-        </div>
-      </nav>
-
-      {/* Main Content Area */}
-      <main>
-        {/* HomePage Component */}
-        <HomePage />
-
-        {/* About Us Section */}
-        <section id="about" className="bg-gray-900 min-h-screen flex items-center justify-center p-8">
-          <div className="text-center max-w-4xl">
-            <h2 className="text-4xl font-bold text-white mb-6">About Us</h2>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              The Institution of Electronics and Telecommunication Engineers (IETE) Students Chapter at BIT Mesra 
-              is dedicated to fostering technical excellence and professional development among students. We organize 
-              workshops, seminars, technical competitions, and guest lectures to keep our members at the forefront 
-              of technological advancements.
-            </p>
-          </div>
-        </section>
-
-        {/* Events Section */}
-        <section id="events"  >
-          <Events/>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 p-6 text-center text-gray-400 rounded-t-lg mt-8">
-        <p>&copy; {new Date().getFullYear()} IETE Students Chapter BIT Mesra. All rights reserved.</p>
-        <p className="text-sm mt-2">Designed with ❤️ by the IETE Team</p>
-      </footer>
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to gray-900 text-white pt-16">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/alumni" element={<Alumni />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
