@@ -1,12 +1,14 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/homepage';
+
 import About from './components/About';
 import Events from './pages/events';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Team from './pages/team';
 import Alumni from './pages/Alumni';
+
 
 export default function App() {
   return (
