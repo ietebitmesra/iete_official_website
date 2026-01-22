@@ -1,49 +1,41 @@
 @import "tailwindcss";
 
-/* Apply Lexend Tera font globally with much tighter spacing to match reference image */
+:root {
+  --brand: #a941d2;
+  --brand-soft: #a941d233;
+  --bg: #05060a;
+  --panel: #0b1020;
+  --card: #0f172a;
+  --border: rgba(255, 255, 255, 0.08);
+  --muted: rgba(255, 255, 255, 0.7);
+  --pill: rgba(255, 255, 255, 0.06);
+  --badge-bg: rgba(255, 255, 255, 0.12);
+}
+
+/* Apply Lexend Tera font globally with tight spacing */
 body {
   font-family: 'Lexend Tera', sans-serif;
-  letter-spacing: -0.08em; /* Much tighter letter spacing */
-  line-height: 1.1; /* Very tight line height */
+  letter-spacing: -0.08em;
+  line-height: 1.1;
+  background: var(--bg);
+  color: white;
 }
 
-/* Additional spacing adjustments for headings - very tight like the reference */
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.12em; /* Very tight for headings to match image */
-  line-height: 0.9; /* Extremely tight line height */
+  letter-spacing: -0.12em;
+  line-height: 0.9;
 }
 
-/* Simple, clean animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-/* Apply smooth animations */
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out;
-}
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
+.animate-fade-in { animation: fadeIn 0.8s ease-out; }
 
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out;
-}
-
-/* Clean glass effect - much more subtle */
 .glass-effect {
   backdrop-filter: blur(8px);
   background: rgba(0, 0, 0, 0.3);
