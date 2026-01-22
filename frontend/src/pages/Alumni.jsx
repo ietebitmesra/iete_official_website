@@ -1,136 +1,75 @@
-import team from '../data/profile'
+import React from "react";
+import { Linkedin } from "lucide-react";
+import team from "../data/profile";
 
-function Alumni() {
+const Alumni = () => {
+    const placeholder = "https://via.placeholder.com/112?text=Alumni";
+
     return (
-        <div style={{
-            width: '100vw',
-            minHeight: '100vh',
-            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url("https://via.placeholder.com/1920x1080?text=Techy+Background")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            overflow: 'hidden',
-            paddingTop: '100px',
-        }}>
-            {/* Techy Cards Grid */}
-            <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-                gap: '2rem',
-                zIndex: 2,
-                width: '90vw',
-                maxWidth: '1200px',
-                margin: '5vh auto',
-            }}>
-                {team.map((alumnus, idx) => (
-                    <div key={idx} style={{
-                        background: 'linear-gradient(135deg, #111 0%, #232526 100%)',
-                        borderRadius: '24px',
-                        boxShadow: '0 8px 32px 0 rgba(0,0,0,0.45), 0 1.5px 8px 0 #2196f3',
-                        color: '#fff',
-                        padding: '1.6rem 1.2rem 1.2rem 1.2rem',
-                        minHeight: '340px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                        cursor: 'pointer',
-                    }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'scale(1.05)';
-                            e.currentTarget.style.boxShadow = '0 12px 40px 0 rgba(0,0,0,0.55), 0 3px 12px 0 #2196f3';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'scale(1)';
-                            e.currentTarget.style.boxShadow = '0 8px 32px 0 rgba(0,0,0,0.45), 0 1.5px 8px 0 #2196f3';
-                        }}
-                    >
+        <div
+            id="alumni"
+            className="relative w-full min-h-screen p-8 overflow-hidden bg-black"
+        >
+            <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10" />
 
-                        {/* Avatar */}
-                        <div style={{
-                            background: 'radial-gradient(circle, #232526 0%, #2196f3 80%)',
-                            borderRadius: '50%',
-                            padding: '5px',
-                            marginBottom: '1.2rem',
-                            boxShadow: '0 0 16px 4px #2196f388',
-                            alignSelf: 'center',
-                        }}>
-                            <img
-                                src={alumnus.profile_photo !== "NA" ? alumnus.profile_photo : "https://via.placeholder.com/72"}
-                                alt={alumnus.name}
-                                style={{
-                                    width: '72px',
-                                    height: '72px',
-                                    borderRadius: '50%',
-                                    objectFit: 'cover',
-                                    border: '2.5px solid #18191C',
-                                    boxShadow: '0 0 8px 1px #2196f3cc',
-                                }}
-                            />
+            <div className="max-w-6xl mx-auto relative z-10">
+                <h1 className="text-4xl font-extrabold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#a941d2] via-[#f97316] to-white">
+                    <span className="border-b-2 pb-2 inline-block">Alumni</span>
+                </h1>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+                    {team.map((alumnus) => (
+                        <div
+                            key={alumnus.name}
+                            className="group relative rounded-2xl bg-gradient-to-br from-[#010b3a] via-[#235490] to-[#bbbdda] border border-[#3f3554] hover:border-[#a941d2] shadow-lg flex flex-col items-center p-8 transition-all duration-300 hover:shadow-[#a941d2]/30 hover:shadow-2xl hover:-translate-y-2"
+                        >
+                            <div className="relative mb-4">
+                                <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-[#a941d2] via-transparent to-[#f97316] blur-lg opacity-40 group-hover:opacity-80 transition" />
+                                <img
+                                    src={alumnus.profile_photo !== "NA" ? alumnus.profile_photo : placeholder}
+                                    alt={alumnus.name}
+                                    className="w-28 h-28 object-cover rounded-full border-4 border-yellow-500 relative z-10 shadow-lg transition-transform duration-300 group-hover:scale-105"
+                                />
+                            </div>
+
+                            <h2 className="text-lg md:text-xl font-bold mb-1 text-center group-hover:text-[#f97316] transition">
+                                {alumnus.name}
+                            </h2>
+                            <p className="text-gray-300 font-serif mb-4 mt-1 text-center">
+                                {(alumnus.role || "Alumni").toUpperCase()}
+                            </p>
+
+                            <div className="w-full flex flex-col gap-1 text-sm text-gray-200 text-center min-h-[56px]">
+                                {alumnus.experience?.length ? (
+                                    alumnus.experience.map((exp, i) => (
+                                        <span key={`${alumnus.name}-exp-${i}`} className="block">
+                                            <span className="font-semibold">{exp.role}</span> @ {exp.company}
+                                        </span>
+                                    ))
+                                ) : (
+                                    <span className="text-gray-400">Experience coming soon</span>
+                                )}
+                            </div>
+
+                            {alumnus.linkedin && alumnus.linkedin !== "NA" && (
+                                <div className="flex space-x-3 mt-auto pt-3">
+                                    <a
+                                        href={alumnus.linkedin}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        title="LinkedIn"
+                                        className="group relative rounded-full p-2 hover:bg-blue-600 transition"
+                                    >
+                                        <Linkedin className="w-6 h-6 text-blue-300 group-hover:text-white" />
+                                    </a>
+                                </div>
+                            )}
                         </div>
-
-                        {/* Name + Role */}
-                        <h2 style={{
-                            margin: 0,
-                            fontWeight: 800,
-                            fontSize: '1.2rem',
-                            letterSpacing: '1px',
-                            textShadow: '0 2px 8px #2196f344',
-                        }}>{alumnus.name}</h2>
-                        <p style={{
-                            fontSize: '0.95rem',
-                            fontWeight: 600,
-                            color: '#90caf9',
-                            marginBottom: '0.8rem',
-                        }}>{alumnus.role || "Alumni"}</p>
-
-                        {/* Experience list */}
-                        <div style={{ marginBottom: '1rem', width: '100%' }}>
-                            <h3 style={{ fontSize: '1rem', marginBottom: '0.4rem', color: '#2196f3' }}>Experience:</h3>
-                            {alumnus.experience && alumnus.experience.map((exp, i) => (
-                                <p key={i} style={{
-                                    margin: '0.2rem 0',
-                                    fontSize: '0.9rem',
-                                    opacity: 0.9,
-                                }}>
-                                    <strong>{exp.role}</strong> @ {exp.company}
-                                </p>
-                            ))}
-                        </div>
-
-                        {/* LinkedIn */}
-                        {alumnus.linkedin && alumnus.linkedin !== "NA" && (
-                            <a
-                                href={alumnus.linkedin}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    marginTop: 'auto',
-                                    alignSelf: 'center',
-                                    padding: '8px 16px',
-                                    background: '#2196f3',
-                                    borderRadius: '8px',
-                                    color: '#fff',
-                                    fontWeight: 600,
-                                    textDecoration: 'none',
-                                    transition: '0.3s',
-                                }}
-                                onMouseEnter={(e) => e.currentTarget.style.background = '#42a5f5'}
-                                onMouseLeave={(e) => e.currentTarget.style.background = '#2196f3'}
-                            >
-                                LinkedIn
-                            </a>
-                        )}
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
-}
+};
 
 export default Alumni;
