@@ -1,17 +1,6 @@
-import jwt from "jsonwebtoken";
-
-const auth = (req, res, next) => {
-  const header = req.headers.authorization || "";
-  const token = header.startsWith("Bearer ") ? header.slice(7) : null;
-  if (!token) return res.status(401).json({ message: "No token" });
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    return res.status(401).json({ message: "Invalid token" });
-  }
+const auth = async (req, res, next) => {
+  // TODO: verify JWT and attach user to request
+  return res.status(501).json({ message: "Auth middleware not implemented" });
 };
 
 export default auth;
