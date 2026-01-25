@@ -6,7 +6,7 @@ const Resources = () => {
     <section className="max-w-6xl mx-auto px-6 py-12 space-y-8">
       <header className="flex flex-col gap-3">
         <p className="text-sm text-[var(--muted)] uppercase tracking-[0.2em]">Resources</p>
-        <h1 className="text-3xl md:text-4xl font-bold">ECE / EEE Hub</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand)] via-[#6b7cff] to-[var(--glow)]">ECE / EEE Hub</h1>
         <p className="text-[var(--muted)]">Curated links for Embedded, VLSI, DSP, Controls, Comms, Robotics. Expandable later.</p>
       </header>
 

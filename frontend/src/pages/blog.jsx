@@ -6,7 +6,7 @@ const Blog = () => {
     <section className="max-w-6xl mx-auto px-6 py-12 space-y-8">
       <header className="flex flex-col gap-3">
         <p className="text-sm text-[var(--muted)] uppercase tracking-[0.2em]">Newsletter / Blog</p>
-        <h1 className="text-3xl md:text-4xl font-bold">Insights & Updates</h1>
+        <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--brand)] via-[#6b7cff] to-[var(--glow)]">Insights & Updates</h1>
         <p className="text-[var(--muted)]">Markdown-ready later. For now showing post cards with excerpts.</p>
       </header>
 

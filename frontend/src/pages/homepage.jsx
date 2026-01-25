@@ -63,7 +63,7 @@ export default function HomePage() {
               <div className="space-y-3">
                 <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">BIT Mesra</p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.9]">
-                  IETE Students Chapter
+                  IETE Student's Chapter
                 </h1>
                 <p className="text-lg md:text-xl text-[var(--muted)] max-w-xl">
                   Electronics, telecom, and computing community powering projects, competitions, and research.

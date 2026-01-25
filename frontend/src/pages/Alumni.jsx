@@ -1,9 +1,10 @@
 import React from "react";
 import { Linkedin } from "lucide-react";
 import team from "../data/profile";
+import defaultAvatar from "../assets/user-default avatar logo.jpg";
 
 const Alumni = () => {
-    const placeholder = "https://via.placeholder.com/112?text=Alumni";
+    const placeholder = defaultAvatar;
 
     return (
         <div
@@ -21,13 +22,26 @@ const Alumni = () => {
                     {team.map((alumnus) => (
                         <div
                             key={alumnus.name}
-                            className="group relative rounded-2xl bg-[var(--card)]/70 bg-gradient-to-br from-white/5 via-[var(--brand)]/10 to-black/5 border border-[var(--border)] hover:border-[var(--brand)] shadow-lg flex flex-col items-center p-8 transition-all duration-300 hover:shadow-[var(--brand-soft)] hover:shadow-2xl hover:-translate-y-2"
+                            className={`
+                                group relative
+                                rounded-2xl
+                                bg-[var(--card)]/70 bg-gradient-to-br from-white/5 via-[var(--brand)]/10 to-black/5
+                                border border-[var(--border)] hover:border-[var(--brand)]
+                                shadow-lg bg-transparent
+                                flex flex-col items-center
+                                p-8
+                                transition-all duration-300
+                                hover:shadow-[var(--brand-soft)] hover:shadow-2xl hover:-translate-y-2
+                            `}
                         >
                             <div className="relative mb-4">
                                 <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-[var(--brand)] via-transparent to-[var(--glow)] blur-lg opacity-40 group-hover:opacity-80 transition" />
                                 <img
                                     src={alumnus.profile_photo !== "NA" ? alumnus.profile_photo : placeholder}
                                     alt={alumnus.name}
+                                    onError={(event) => {
+                                        event.currentTarget.src = placeholder;
+                                    }}
                                     className="w-28 h-28 object-cover rounded-full border-4 border-[var(--glow)] relative z-10 shadow-lg transition-transform duration-300 group-hover:scale-105"
                                 />
                             </div>
