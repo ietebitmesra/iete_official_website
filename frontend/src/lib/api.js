@@ -1,9 +1,23 @@
-// Placeholder API client. Swap fetch base URL and add auth headers when backend is ready.
+// API client; add Authorization when token is present.
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 
 export const withAuth = (token) => ({
   Authorization: token ? `Bearer ${token}` : undefined,
 });
+
+const handle = async (res, path) => {
+  let data = {};
+  try {
+    data = await res.json();
+  } catch (_) {
+    /* ignore json parse */
+  }
+  if (!res.ok) {
+    const msg = data?.message || `Request failed: ${path}`;
+    throw new Error(msg);
+  }
+  return data;
+};
 
 export async function apiGet(path, token) {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -12,8 +26,7 @@ export async function apiGet(path, token) {
       ...withAuth(token),
     },
   });
-  if (!res.ok) throw new Error(`GET ${path} failed`);
-  return res.json();
+  return handle(res, path);
 }
 
 export async function apiPost(path, body, token) {
@@ -25,6 +38,5 @@ export async function apiPost(path, body, token) {
     },
     body: JSON.stringify(body),
   });
-  if (!res.ok) throw new Error(`POST ${path} failed`);
-  return res.json();
+  return handle(res, path);
 }

@@ -101,87 +101,67 @@ export default function Events() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-gray-100">
+    <div className="min-h-screen bg-[var(--bg)] text-white">
       {/* Event Details Modal */}
       {selectedEvent && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-xl z-50 flex items-center justify-center p-4 transition-all duration-300">
-          <div className="bg-transparent backdrop-blur-2xl rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto 
-            shadow-2xl border border-white/10 flex flex-col relative"
-          >
-            <div className="p-10 md:p-12">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xl z-50 flex items-center justify-center p-4 transition-all duration-300">
+          <div className="bg-[var(--panel)]/80 backdrop-blur-2xl rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-[var(--border)] flex flex-col relative">
+            <div className="p-8 md:p-10">
               <button
                 onClick={closeEventDetails}
-                className="absolute top-4 right-4 bg-white/10 backdrop-blur-xl rounded-full p-2 
-                  hover:bg-white/20 transition-all duration-300 z-50"
+                className="absolute top-4 right-4 bg-white/10 backdrop-blur-xl rounded-full p-2 hover:bg-white/20 transition-all duration-300 z-50"
               >
                 <X className="w-6 h-6 text-gray-200" />
               </button>
 
               <div className="space-y-6">
-                {/* Category  */}
                 <div className="flex items-center gap-3">
-                  <span className="bg-white/10 backdrop-blur-sm text-cyan-300 px-4 py-2 
-                    rounded-full text-base font-medium border border-cyan-500/30"
-                  >
+                  <span className="bg-white/10 backdrop-blur-sm text-[var(--brand)] px-4 py-2 rounded-full text-sm font-medium border border-[var(--brand)]/40">
                     {selectedEvent.category}
                   </span>
                 </div>
 
-                {/* Title */}
-                <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 
-                  to-purple-400 bg-clip-text text-transparent"
-                >
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-[var(--brand)] via-[#6b7cff] to-[var(--glow)] bg-clip-text text-transparent">
                   {selectedEvent.title}
                 </h2>
 
-                {/* Event Info Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4 bg-white/5 backdrop-blur-xl rounded-xl p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3 bg-white/5 backdrop-blur-xl rounded-xl p-5 border border-[var(--border)]">
                     <div className="flex items-center gap-3 text-gray-300">
-                      <Calendar className="w-5 h-5 text-cyan-400" />
-                      <span>{formatDate(selectedEvent.date)} at {selectedEvent.time}</span>
+                      <Calendar className="w-5 h-5 text-[var(--brand)]" />
+                      <span className="text-sm">{formatDate(selectedEvent.date)} at {selectedEvent.time}</span>
                     </div>
                     <div className="flex items-center gap-3 text-gray-300">
-                      <MapPin className="w-5 h-5 text-emerald-400" />
-                      <span>{selectedEvent.location}</span>
+                      <MapPin className="w-5 h-5 text-[var(--glow)]" />
+                      <span className="text-sm">{selectedEvent.location}</span>
                     </div>
                     {selectedEvent.speaker && (
                       <div className="flex items-center gap-3 text-gray-300">
-                        <GraduationCap className="w-5 h-5 text-purple-400" />
-                        <span>{selectedEvent.speaker}</span>
+                        <GraduationCap className="w-5 h-5 text-[#8b7bff]" />
+                        <span className="text-sm">{selectedEvent.speaker}</span>
                       </div>
                     )}
                   </div>
-                  
-                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10">
-                    <h4 className="font-semibold text-cyan-300 mb-2">Event Details</h4>
-                    <p className="text-base text-gray-300 mb-1"><strong className="text-gray-200">Department:</strong> {selectedEvent.department}</p>
-                    <p className="text-base text-gray-300 mb-1"><strong className="text-gray-200">Duration:</strong> {selectedEvent.duration}</p>
-                    <p className="text-base text-gray-300"><strong className="text-gray-200">Prerequisites:</strong> {selectedEvent.prerequisites}</p>
+
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl p-5 border border-[var(--border)]">
+                    <h4 className="font-semibold text-[var(--brand)] mb-2">Event Details</h4>
+                    <p className="text-sm text-gray-300 mb-1"><strong className="text-gray-200">Department:</strong> {selectedEvent.department}</p>
+                    <p className="text-sm text-gray-300 mb-1"><strong className="text-gray-200">Duration:</strong> {selectedEvent.duration}</p>
+                    <p className="text-sm text-gray-300"><strong className="text-gray-200">Prerequisites:</strong> {selectedEvent.prerequisites}</p>
                   </div>
                 </div>
 
-                {/* Description */}
-                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10">
-                  <h3 className="text-xl font-semibold text-gray-200 mb-3">About This Event</h3>
-                  <p className="text-gray-300 leading-relaxed">{selectedEvent.fullDescription}</p>
+                <div className="bg-white/5 backdrop-blur-xl rounded-xl p-5 border border-[var(--border)]">
+                  <h3 className="text-lg font-semibold text-gray-200 mb-3">About This Event</h3>
+                  <p className="text-gray-300 leading-relaxed text-sm">{selectedEvent.fullDescription}</p>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex gap-4 justify-end">
-                  <button className="bg-[#bec1ee]/80 backdrop-blur-xl text-gray-900 px-8 py-3 
-                    rounded-xl hover:shadow-xl hover:shadow-[#bec1ee]/30 transition-all duration-300 
-                    font-medium hover:scale-105 flex items-center gap-2"
-                  >
+                <div className="flex gap-3 justify-end">
+                  <button className="btn-primary text-sm px-4 py-2">
                     Register Now
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-4 h-4" />
                   </button>
-                  <button className="bg-white/10 backdrop-blur-xl text-gray-200 px-8 py-3 
-                    rounded-xl hover:shadow-xl hover:bg-white/20 transition-all duration-300 
-                    font-medium hover:scale-105 border border-white/20"
-                  >
-                    Add to Calendar
-                  </button>
+                  <button className="btn-secondary text-sm px-4 py-2">Add to Calendar</button>
                 </div>
               </div>
             </div>
@@ -189,177 +169,94 @@ export default function Events() {
         </div>
       )}
 
-      {/* Header section */}
-      <header className="relative overflow-hidden bg-black">
-        <div className="absolute inset-0 bg-black"></div>
-        <div className="relative max-w-7xl mx-auto px-6 py-20">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <GraduationCap className="w-16 h-16 text-cyan-400 drop-shadow-lg" />
-              <h1 className="text-6xl md:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent drop-shadow-2xl">
-                Campus Events
-              </h1>
-            </div>
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Discover inspiring speaker sessions, workshops, and academic events happening on campus.
+      {/* Header */}
+      <header className="relative overflow-hidden bg-[var(--bg)]">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
+        <div className="relative max-w-6xl mx-auto px-6 py-16">
+          <div className="space-y-6">
+            <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">Events</p>
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-[var(--brand)] via-[#6b7cff] to-[var(--glow)] bg-clip-text text-transparent">
+              Campus Events
+            </h1>
+            <p className="text-lg text-gray-300 max-w-2xl">
+              Workshops, talks, and competitions curated for electronics and computing enthusiasts.
             </p>
-            
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto relative">
-              <div className="relative">
-                <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 text-cyan-400 w-6 h-6" />
-                <input
-                  type="text"
-                  placeholder="Search events, speakers, departments..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-14 pr-6 py-5 bg-gray-800/60 backdrop-blur-xl border border-gray-600/50 rounded-2xl text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 shadow-2xl text-lg ring-1 ring-white/10"
-                />
-              </div>
+            <div className="max-w-xl relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--brand)] w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search events, speakers, departments..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-4 bg-[var(--panel)]/70 backdrop-blur-xl border border-[var(--border)] rounded-2xl text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] focus:border-transparent transition-all duration-300 shadow-2xl text-base"
+              />
             </div>
           </div>
         </div>
       </header>
 
-      {/* Upcoming Events */}
+      {/* Featured */}
       {featuredEvents.length > 0 && (
-        <section className="w-full px-0 py-12">
-          <h2 className="flex items-center gap-3 text-4xl font-bold mb-10 ml-8">
-            <span className="text-yellow-400 text-3xl">✨</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Upcoming Events
-            </span>
-          </h2>
-          <div className="flex flex-wrap gap-16 ml-8">
+        <section className="max-w-6xl mx-auto px-6 py-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Upcoming Events</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featuredEvents.map((event) => (
-              <div
+              <button
                 key={event.id}
                 onClick={() => openEventDetails(event)}
-                className="group w-[600px] min-h-[420px] flex-shrink-0 rounded-3xl overflow-hidden
-                  bg-white/5 bg-gradient-to-br from-white/5 via-[#bec1ee]/5 to-black/5
-                  backdrop-blur-2xl border border-white/20
-                  shadow-2xl transition-all duration-300
-                  hover:scale-[1.03] hover:shadow-[#bec1ee]/40 flex flex-col
-                  cursor-pointer"
+                className="text-left group rounded-2xl bg-[var(--card)]/70 border border-[var(--border)] p-6 hover:-translate-y-1 transition shadow-lg"
               >
-                <div className="flex flex-col flex-1 h-full justify-between p-12">
-                  <div className="flex flex-col flex-1 justify-between">
-                    <div className="flex items-center gap-3 mb-6">
-                      <span className="bg-gradient-to-r from-gray-700/60 to-gray-600/60 backdrop-blur-sm text-cyan-300 px-4 py-2 rounded-full text-base font-medium border border-cyan-500/30">
-                        {event.category}
-                      </span>
-                    </div>
-                    <h3 className="text-2xl font-bold mb-6 group-hover:text-cyan-400 transition-colors duration-300 text-gray-100">
-                      {event.title}
-                    </h3>
-                    <div className="space-y-4 mb-8">
-                      <div className="flex items-center gap-3 text-gray-300">
-                        <span className="text-base">{formatDate(event.date)} at {event.time}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-gray-300">
-                        <MapPin className="w-5 h-5 text-emerald-400" />
-                        <span className="text-base">{event.location}</span>
-                      </div>
-                      {event.speaker && (
-                        <div className="flex items-center gap-3 text-gray-300">
-                          <GraduationCap className="w-5 h-5 text-purple-400" />
-                          <span className="text-base">{event.speaker}</span>
-                        </div>
-                      )}
-                    </div>
-                    <p className="text-gray-300 text-base mb-8 flex-1">{event.description}</p>
-                  </div>
-                  <div className="flex items-center justify-between mt-8">
-                    <span className="text-base text-gray-400 font-medium">{event.department}</span>
-                    <button 
-                      onClick={() => openEventDetails(event)}
-                      className="bg-[#bec1ee] text-gray-900 px-8 py-3 rounded-xl hover:shadow-xl hover:shadow-[#bec1ee]/50 transition-all duration-300 flex items-center gap-2 group hover:scale-105 font-medium ring-1 ring-white/20 text-base"
-                    >
-                      <Eye className="w-5 h-5" />
-                      View Details
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </button>
-                  </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">{event.category}</span>
+                  <span className="text-xs text-[var(--muted)]">{formatDate(event.date)}</span>
                 </div>
-              </div>
+                <h3 className="text-xl font-semibold mt-3 group-hover:text-[var(--brand)] transition">{event.title}</h3>
+                <p className="text-sm text-gray-300 mt-2 line-clamp-3">{event.description}</p>
+                <div className="flex items-center gap-4 mt-4 text-sm text-gray-300">
+                  <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[var(--glow)]" />{event.location}</span>
+                  {event.speaker && <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4 text-[#8b7bff]" />{event.speaker}</span>}
+                </div>
+              </button>
             ))}
           </div>
         </section>
       )}
 
-      {/* All Events */}
-      <section className="w-full px-0 py-12">
-        <div className="flex items-center justify-between mb-10 ml-8">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-3">
-            <span className="text-yellow-400 text-3xl">✨</span>
-            <span>All Events</span>
-          </h2>
-          <span className="text-gray-200 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/30 font-medium">
-            {filteredEvents.length} events found
-          </span>
+      {/* All events */}
+      <section className="max-w-6xl mx-auto px-6 pb-16">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold">All Events</h2>
+          <span className="text-sm text-[var(--muted)]">{filteredEvents.length} events found</span>
         </div>
-        <div className="flex flex-wrap gap-16 ml-8">
-          {filteredEvents.map((event) => (
-            <div
-              key={event.id}
-              onClick={() => openEventDetails(event)}
-              className="group w-[600px] min-h-[420px] flex-shrink-0 rounded-3xl overflow-hidden
-                bg-white/5 bg-gradient-to-br from-white/5 via-[#bec1ee]/5 to-black/5
-                backdrop-blur-2xl border border-white/20
-                shadow-2xl transition-all duration-300
-                hover:scale-[1.03] hover:shadow-[#bec1ee]/40 flex flex-col"
-            >
-              <div className="flex flex-col flex-1 h-full justify-between p-12">
-                <div className="flex flex-col flex-1 justify-between">
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className="bg-gradient-to-r from-gray-700/60 to-gray-600/60 backdrop-blur-sm text-cyan-300 px-4 py-2 rounded-full text-base font-medium border border-cyan-500/30">
-                      {event.category}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-6 group-hover:text-cyan-400 transition-colors duration-300 text-gray-100">
-                    {event.title}
-                  </h3>
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <Calendar className="w-5 h-5 text-cyan-400" />
-                      <span className="text-base">{formatDate(event.date)} at {event.time}</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <MapPin className="w-5 h-5 text-emerald-400" />
-                      <span className="text-base">{event.location}</span>
-                    </div>
-                    {event.speaker && (
-                      <div className="flex items-center gap-3 text-gray-300">
-                        <GraduationCap className="w-5 h-5 text-purple-400" />
-                        <span className="text-base">{event.speaker}</span>
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-gray-300 text-base mb-8 flex-1">{event.description}</p>
-                </div>
-                <div className="flex items-center justify-between mt-8">
-                  <span className="text-base text-gray-400 font-medium">{event.department}</span>
-                  <button 
-                    onClick={() => openEventDetails(event)}
-                    className="bg-[#bec1ee] text-gray-900 px-8 py-3 rounded-xl hover:shadow-xl hover:shadow-[#bec1ee]/50 transition-all duration-300 flex items-center gap-2 group hover:scale-105 font-medium ring-1 ring-white/20 text-base"
-                  >
-                    <Eye className="w-5 h-5" />
-                    View Details
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </button>
-                </div>
-              </div>
+
+        {filteredEvents.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="bg-gradient-to-br from-[var(--panel)]/70 to-[var(--card)]/60 backdrop-blur-sm rounded-3xl p-8 max-w-md mx-auto border border-[var(--border)] shadow-2xl ring-1 ring-white/10">
+              <Calendar className="w-16 h-16 text-[var(--brand)] mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-gray-200 mb-2">No events found</h3>
+              <p className="text-gray-300 text-sm">Try adjusting your search criteria to find more events.</p>
             </div>
-          ))}
-        </div>
-        
-        {filteredEvents.length === 0 && (
-          <div className="text-center py-20">
-            <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-3xl p-10 max-w-md mx-auto border border-gray-700/50 shadow-2xl ring-1 ring-white/10">
-              <Calendar className="w-20 h-20 text-cyan-400 mx-auto mb-6" />
-              <h3 className="text-2xl font-bold text-gray-200 mb-3">No events found</h3>
-              <p className="text-gray-300">Try adjusting your search criteria to find more events.</p>
-            </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredEvents.map((event) => (
+              <button
+                key={event.id}
+                onClick={() => openEventDetails(event)}
+                className="text-left group rounded-2xl bg-[var(--card)]/70 border border-[var(--border)] p-6 hover:-translate-y-1 transition shadow-lg"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">{event.category}</span>
+                  <span className="text-xs text-[var(--muted)]">{formatDate(event.date)}</span>
+                </div>
+                <h3 className="text-xl font-semibold mt-3 group-hover:text-[var(--brand)] transition">{event.title}</h3>
+                <p className="text-sm text-gray-300 mt-2 line-clamp-3">{event.description}</p>
+                <div className="flex items-center gap-4 mt-4 text-sm text-gray-300">
+                  <span className="flex items-center gap-2"><MapPin className="w-4 h-4 text-[var(--glow)]" />{event.location}</span>
+                  {event.speaker && <span className="flex items-center gap-2"><GraduationCap className="w-4 h-4 text-[#8b7bff]" />{event.speaker}</span>}
+                </div>
+              </button>
+            ))}
           </div>
         )}
       </section>

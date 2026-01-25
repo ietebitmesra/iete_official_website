@@ -1,100 +1,113 @@
-import React, { useState, useEffect } from 'react';
-import About from '../components/About';
-import Events from '../components/Events';
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import About from "../components/About";
+import Events from "../components/Events";
+import logo from "/logo.png";
+
+const stats = [
+  { label: "Active Members", value: "120+" },
+  { label: "Projects Shipped", value: "30" },
+  { label: "Events / Year", value: "15" },
+];
+
+const quickLinks = [
+  { title: "Projects", desc: "Verified builds from the chapter", to: "/projects" },
+  { title: "Leaderboard", desc: "Coding, dev, research highlights", to: "/leaderboard" },
+  { title: "Resources", desc: "ECE/EEE curated learning hub", to: "/resources" },
+];
+
 export default function HomePage() {
-  // State to track loading of the Spline scene
   const [isSplineLoaded, setIsSplineLoaded] = useState(false);
-  
-  // Clear any cached version on component mount
+  const splineUrl = useMemo(
+    () => `https://my.spline.design/boxeshover-ev1uKPCZ6mXpRnteiJT32KCt/?t=${Date.now()}`,
+    []
+  );
+
   useEffect(() => {
-    // Force reload of any cached resources
-    const timestamp = new Date().getTime();
-    const iframeEl = document.querySelector('iframe');
-    if (iframeEl) {
-      iframeEl.src = `https://my.spline.design/boxeshover-ev1uKPCZ6mXpRnteiJT32KCt/?t=${timestamp}`;
-    }
+    // no-op: useMemo already seeds a cache-busting param
   }, []);
 
   return (
-        <>
-    <section id="home" className="relative h-screen flex flex-col overflow-hidden">
-      {/* Spline Background Container */}
-      <div className="absolute inset-0 z-0">
-        <iframe
-          src={`https://my.spline.design/boxeshover-ev1uKPCZ6mXpRnteiJT32KCt/?refresh=${new Date().getTime()}`}
-          frameBorder="0"
-          width="100%"
-          height="100%"
-          className="w-full h-full pointer-events-auto"
-          title="IETE Spline Background"
-          loading="eager"
-          allow="pointer-lock; camera; microphone; autoplay"
-          onLoad={() => setIsSplineLoaded(true)}
-          ></iframe>
-        
-        {/* Loading overlay that disappears when Spline is loaded */}
-        {!isSplineLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
-            <div className="text-white text-lg">Loading...</div>
-          </div>
-        )}
-      </div>
+    <>
+      <section id="home" className="relative min-h-screen flex flex-col overflow-hidden">
+        {/* Spline Background */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <iframe
+            src={splineUrl}
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            className="w-full h-full"
+            title="IETE Spline Background"
+            loading="eager"
+            allow="pointer-lock; camera; microphone; autoplay"
+            style={{
+              transform: "scale(clamp(1.05, 1vw + 1, 1.18))",
+              transformOrigin: "center",
+            }}
+            onLoad={() => setIsSplineLoaded(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/45 to-black/65 pointer-events-none" />
+          {!isSplineLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black">
+              <div className="text-white text-lg">Loading experience...</div>
+            </div>
+          )}
+        </div>
 
-      {/* Content Layout - Allow pointer events to pass through */}
-      <div className="relative z-10 h-full flex flex-col justify-between p-8 lg:p-16 pointer-events-none">
-        {/* Main Content Area */}
-        <div className="flex-1 flex items-end">
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
-            {/* Left Side - Logo and Main Title */}
-            <div className="pointer-events-none self-end">
-              {/* IETE Logo */}
-              <div className="mb-6">
-                <img 
-                  src="public/logo.png" 
-                  alt="IETE Logo" 
-                  className="h-42 md:h-56 lg:h-64 w-auto"
-                />
+        {/* Content */}
+        <div className="relative z-10 flex-1 w-full max-w-[88rem] mx-auto px-6 lg:px-10 py-16 flex flex-col gap-12 pointer-events-none">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-end">
+            <div className="space-y-6">
+              <img src={logo} alt="IETE Logo" className="h-24 md:h-32 lg:h-36 w-auto block" />
+              <div className="space-y-3">
+                <p className="text-sm uppercase tracking-[0.3em] text-[var(--muted)]">BIT Mesra</p>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[0.9]">
+                  IETE Students Chapter
+                </h1>
+                <p className="text-lg md:text-xl text-[var(--muted)] max-w-xl">
+                  Electronics, telecom, and computing community powering projects, competitions, and research.
+                </p>
               </div>
-              
-              {/* Main Title */}
-              <h1 className="text-white font-bold leading-none">
-                <div className="text-5xl lg:text-6xl xl:text-7xl mb-2">IETE</div>
-                <div className="text-3xl lg:text-4xl xl:text-5xl">STUDENT'S CHAPTER</div>
-              </h1>
-              <div className="mt-6">
-                <p className="text-white text-xl lg:text-2xl font-medium">BIT MESRA</p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/auth/register" className="btn-primary pointer-events-auto">
+                  Join the chapter
+                </Link>
+                <Link to="/events" className="btn-secondary pointer-events-auto">
+                  View events
+                </Link>
               </div>
             </div>
 
-            {/* Right Side - Description and Buttons */}
-            <div className="flex flex-col items-end justify-end pointer-events-auto self-end">
-              <div className="text-right mb-8 max-w-md">
-                <p className="text-white text-lg lg:text-xl leading-relaxed pointer-events-none">
-                  Institution of Electronics and Telecommunication Engineers
-                </p>
-              </div>
-              
-              {/* Action Buttons */}
-              <div className="flex flex-col gap-4 w-full md:w-auto md:min-w-[240px]">
-                <button className="px-8 py-3 border-2 border-white text-white rounded-full font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 w-full">
-                  About Us
-                </button>
-                <button className="px-8 py-3 bg-blue-500 text-white rounded-full font-semibold text-lg hover:bg-blue-600 transition-all duration-300 flex items-center justify-center gap-2 w-full">
-                  Learn more
-                  <div className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
+            <div className="flex flex-col gap-4 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {stats.map((item) => (
+                    <div key={item.label} className="card-surface p-5 text-center bg-[var(--card)]/80 border-[var(--border)] min-h-[140px] flex flex-col justify-center gap-2">
+                      <div className="text-2xl md:text-3xl font-bold">{item.value}</div>
+                      <div className="text-xs text-[var(--muted)] uppercase tracking-[0.15em] leading-snug">{item.label}</div>
                   </div>
-                </button>
+                ))}
+              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {quickLinks.map((card) => (
+                  <Link
+                    key={card.title}
+                      to={card.to}
+                      className="card-surface p-5 bg-[var(--panel)]/80 border-[var(--border)] hover:-translate-y-1 transition flex flex-col gap-3 min-h-[200px] pointer-events-auto"
+                  >
+                      <div className="text-xs md:text-sm uppercase tracking-[0.2em] text-[var(--muted)] leading-tight">{card.title}</div>
+                      <div className="text-base font-semibold leading-snug break-words">{card.desc}</div>
+                      <span className="text-[var(--glow)] text-sm mt-auto">Open →</span>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-        <About/>
-        <Events />
-       </>
+      </section>
+
+      <About />
+      <Events />
+    </>
   );
 }

@@ -6,12 +6,22 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("visitor");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login({ email, role });
-    navigate("/admin");
+    setError("");
+    setLoading(true);
+    try {
+      const user = await login({ email, password });
+      navigate(user?.role === "admin" ? "/admin" : "/");
+    } catch (err) {
+      setError(err.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,27 +46,19 @@ const Login = () => {
           <label className="text-sm text-[var(--muted)]">Password</label>
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full rounded-xl border border-[var(--border)] bg-[var(--panel)] px-4 py-3 text-white focus:border-[var(--brand)] focus:outline-none"
             placeholder="••••••••"
           />
         </div>
-        <div className="space-y-2">
-          <label className="text-sm text-[var(--muted)]">Role (mock)</label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full rounded-xl border border-[var(--border)] bg-[var(--panel)] px-4 py-3 text-white focus:border-[var(--brand)] focus:outline-none"
-          >
-            <option value="visitor">Visitor</option>
-            <option value="member">Member</option>
-            <option value="admin">Admin</option>
-          </select>
-        </div>
+        {error && <p className="text-red-400 text-sm">{error}</p>}
         <button
           type="submit"
-          className="w-full rounded-xl bg-[var(--brand)] text-white py-3 font-semibold hover:opacity-90 transition"
+          disabled={loading}
+          className="w-full rounded-xl bg-[var(--brand)] text-white py-3 font-semibold hover:opacity-90 transition disabled:opacity-60"
         >
-          Sign in (mock)
+          {loading ? "Signing in..." : "Sign in"}
         </button>
       </form>
     </section>
