@@ -4,10 +4,15 @@ const userSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: ["visitor", "member", "admin"], default: "visitor" },
-    avatarUrl: { type: String },
-    bio: { type: String },
+    passwordHash: { type: String },
+    role: { type: String, default: "user" },
+    profileSetup: { type: Boolean, default: false },
+    googleId: { type: String },
+    avatar: { type: String },
+    githubContributions: { type: Number, default: 0 },
+    codeforcesRating: { type: Number, default: 0 },
+    projectsCount: { type: Number, default: 0 },
+    leaderboardScore: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

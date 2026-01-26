@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -25,12 +25,14 @@ const navLinks = [
 ];
 
 export default function Navbar() {
-  const { user, isAuthenticated, logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    setMenuOpen(false);
+    navigate("/login");
   };
 
   return (
@@ -52,28 +54,48 @@ export default function Navbar() {
 
           {/* Auth actions */}
           <div className="flex items-center gap-3">
-            {isAuthenticated ? (
-              <>
-                <span className="text-white/80 text-sm md:text-base">
-                  {user?.email || "User"} {user?.role ? `(${user.role})` : ""}
-                </span>
+            {user ? (
+              <div className="relative">
                 <button
-                  onClick={handleLogout}
-                  className="bg-gray-900/80 hover:bg-gray-800/90 text-white font-semibold px-6 py-2.5 rounded-full border border-white/20 hover:border-white/40 hover:shadow-lg transition-all duration-300 text-sm md:text-base transform hover:scale-105"
+                  onClick={() => setMenuOpen((prev) => !prev)}
+                  className="flex items-center gap-2 text-white/90 text-sm md:text-base font-medium hover:text-blue-300 transition-colors"
                 >
-                  Logout
+                  <span className="h-8 w-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-xs">
+                    {(user?.name || user?.email || "U").slice(0, 1).toUpperCase()}
+                  </span>
+                  <span className="hidden sm:inline">{user?.name || user?.email || "Profile"}</span>
                 </button>
-              </>
+
+                {menuOpen && (
+                  <div className="absolute right-0 mt-3 w-48 rounded-xl border border-white/10 bg-black/80 backdrop-blur-md shadow-lg overflow-hidden">
+                    <button
+                      onClick={() => {
+                        setMenuOpen(false);
+                        navigate("/profile");
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm text-white/90 hover:bg-white/10"
+                    >
+                      Profile
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-2 text-sm text-white/90 hover:bg-white/10"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <>
                 <Link
-                  to="/auth/login"
+                  to="/login"
                   className="text-white/80 hover:text-white text-sm md:text-base"
                 >
                   Login
                 </Link>
                 <Link
-                  to="/auth/register"
+                  to="/register"
                   className="bg-gray-900/80 hover:bg-gray-800/90 text-white font-semibold px-6 py-2.5 rounded-full border border-white/20 hover:border-white/40 hover:shadow-lg transition-all duration-300 text-sm md:text-base transform hover:scale-105"
                 >
                   Register

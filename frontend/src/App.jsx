@@ -14,6 +14,8 @@ import Blog from "./pages/blog";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Admin from "./pages/admin";
+import Dashboard from "./pages/dashboard";
+import Profile from "./pages/profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -32,7 +34,25 @@ export default function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/auth/login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/admin"
             element={
