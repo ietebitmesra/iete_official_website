@@ -10,6 +10,7 @@ import eventRoutes from "./routes/events.js";
 import resourceRoutes from "./routes/resources.js";
 import blogRoutes from "./routes/blog.js";
 import leaderboardRoutes from "./routes/leaderboard.js";
+import leaderboardRoutesV2 from "./routes/leaderboardRoutes.js";
 import adminRoutes from "./routes/admin.js";
 
 dotenv.config();
@@ -30,6 +31,7 @@ app.use("/api/events", eventRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/blog", blogRoutes);
 app.use("/api/leaderboard", leaderboardRoutes);
+app.use("/api/leaderboard", leaderboardRoutesV2);
 app.use("/api/admin", adminRoutes);
 
 connectDB().then(() => {
