@@ -1,10 +1,43 @@
+import jwt from "jsonwebtoken";
 import Project from "../models/Project.js";
 
 export const getProjects = async (req, res) => {
   try {
     // TODO: Add pagination for projects list.
     // TODO: Add filtering by technology/category/year.
-    const projects = await Project.find({ status: "approved" })
+    const statusParam = (req.query.status || "").toLowerCase();
+    const requiresAdmin = statusParam === "pending" || statusParam === "all";
+
+    if (requiresAdmin) {
+      const authHeader = req.headers.authorization || "";
+      if (!authHeader.startsWith("Bearer ")) {
+        return res.status(403).json({ success: false, message: "Admin access required." });
+      }
+
+      try {
+        const token = authHeader.split(" ")[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!decoded || decoded.role !== "admin") {
+          return res.status(403).json({ success: false, message: "Admin access required." });
+        }
+      } catch (error) {
+        return res.status(403).json({ success: false, message: "Admin access required." });
+      }
+    }
+
+    let filter = { status: "approved" };
+
+    if (!statusParam || statusParam === "approved") {
+      filter = { status: "approved" };
+    } else if (statusParam === "pending") {
+      filter = { status: "pending" };
+    } else if (statusParam === "all") {
+      filter = {};
+    } else {
+      return res.status(400).json({ success: false, message: "Invalid status filter." });
+    }
+
+    const projects = await Project.find(filter)
       .populate("owner", "name email avatar")
       .sort({ createdAt: -1 });
 

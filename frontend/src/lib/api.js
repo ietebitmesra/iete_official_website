@@ -40,3 +40,27 @@ export async function apiPost(path, body, token) {
   });
   return handle(res, path);
 }
+
+export async function apiPatch(path, body, token) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      ...withAuth(token),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  return handle(res, path);
+}
+
+export async function apiPut(path, body, token) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...withAuth(token),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  return handle(res, path);
+}

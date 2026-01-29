@@ -16,6 +16,10 @@ import Register from "./pages/register";
 import Admin from "./pages/admin";
 import Dashboard from "./pages/dashboard";
 import Profile from "./pages/profile";
+import DashboardProjects from "./pages/DashboardProjects";
+import AdminProjects from "./pages/AdminProjects";
+import SubmitProject from "./pages/SubmitProject";
+import EditProfile from "./pages/EditProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -29,6 +33,14 @@ export default function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/team" element={<Team />} />
           <Route path="/alumni" element={<Alumni />} />
+          <Route
+            path="/projects/submit"
+            element={
+              <ProtectedRoute>
+                <SubmitProject />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/projects" element={<Projects />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/resources" element={<Resources />} />
@@ -54,10 +66,34 @@ export default function App() {
             }
           />
           <Route
+            path="/profile/edit"
+            element={
+              <ProtectedRoute>
+                <EditProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard/projects"
+            element={
+              <ProtectedRoute>
+                <DashboardProjects />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/admin"
             element={
               <ProtectedRoute roles={["admin"]}>
                 <Admin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/projects"
+            element={
+              <ProtectedRoute roles={["admin"]}>
+                <AdminProjects />
               </ProtectedRoute>
             }
           />

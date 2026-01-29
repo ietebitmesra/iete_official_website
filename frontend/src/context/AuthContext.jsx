@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { apiGet } from "../lib/api";
 
 const AuthContext = createContext(undefined);
 
@@ -45,22 +46,7 @@ export const AuthProvider = ({ children }) => {
       setToken(storedToken);
 
       try {
-        const apiUrl = import.meta.env.VITE_API_URL;
-        const res = await fetch(`${apiUrl}/api/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${storedToken}`,
-          },
-        });
-
-        if (!res.ok) {
-          localStorage.removeItem("token");
-          setToken(null);
-          setUser(null);
-          setLoading(false);
-          return;
-        }
-
-        const data = await res.json();
+        const data = await apiGet("/auth/me", storedToken);
         setUser(data.user || null);
       } catch (err) {
         localStorage.removeItem("token");

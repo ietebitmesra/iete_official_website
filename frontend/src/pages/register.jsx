@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../components/AuthForm.jsx";
 import GoogleLoginButton from "../components/GoogleLoginButton.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
+import { apiPost } from "../lib/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -23,19 +24,7 @@ const Register = () => {
 
     setLoading(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL;
-      const response = await fetch(`${apiUrl}/api/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-
-      if (!response.ok) {
-        const errPayload = await response.json().catch(() => ({}));
-        throw new Error(errPayload.message || "Registration failed");
-      }
-
-      const data = await response.json();
+      const data = await apiPost("/auth/register", { name, email, password });
       login(data.user, data.token);
       navigate("/dashboard");
     } catch (err) {
@@ -53,19 +42,7 @@ const Register = () => {
         return;
       }
 
-      const apiUrl = import.meta.env.VITE_API_URL;
-      const result = await fetch(`${apiUrl}/api/auth/google`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idToken }),
-      });
-
-      if (!result.ok) {
-        const errPayload = await result.json().catch(() => ({}));
-        throw new Error(errPayload.message || "Google login failed.");
-      }
-
-      const data = await result.json();
+      const data = await apiPost("/auth/google", { idToken });
       login(data.user, data.token);
       navigate("/dashboard");
     } catch (err) {

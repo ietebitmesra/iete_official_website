@@ -1,6 +1,9 @@
 const admin = async (req, res, next) => {
-  // TODO: check admin role/permissions
-  return res.status(501).json({ message: "Admin middleware not implemented" });
+  if (!req.user || req.user.role !== "admin") {
+    return res.status(403).json({ success: false, message: "Admin access required." });
+  }
+
+  return next();
 };
 
 export default admin;
