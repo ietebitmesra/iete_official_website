@@ -2,7 +2,7 @@ import React from 'react'
 
 const About = () => {
   return (
-    <section className="relative w-full min-h-screen p-8 overflow-hidden bg-[var(--bg)]">
+    <section className="relative w-full min-h-screen p-8 overflow-hidden bg-transparent">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80" />
         <div className="absolute -top-32 -right-32 h-72 w-72 rounded-full bg-[var(--brand)]/20 blur-3xl" />

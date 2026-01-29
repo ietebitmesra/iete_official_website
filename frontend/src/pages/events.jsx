@@ -101,7 +101,7 @@ export default function Events() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-white">
+    <div className="min-h-screen bg-transparent text-white">
       {/* Event Details Modal */}
       {selectedEvent && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xl z-50 flex items-center justify-center p-4 transition-all duration-300">
@@ -170,7 +170,7 @@ export default function Events() {
       )}
 
       {/* Header */}
-      <header className="relative overflow-hidden bg-[var(--bg)]">
+      <header className="relative overflow-hidden bg-transparent">
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
         <div className="relative max-w-6xl mx-auto px-6 py-16">
           <div className="space-y-6">

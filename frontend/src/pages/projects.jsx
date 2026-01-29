@@ -49,7 +49,8 @@ const Projects = () => {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-12 space-y-8">
+    <section className="min-h-screen bg-gradient-to-br from-purple-950/30 via-black to-blue-950/30">
+      <div className="max-w-6xl mx-auto px-6 py-12 space-y-8">
       <header className="flex flex-col gap-3">
         <p className="text-sm text-white/55 uppercase tracking-[0.2em]">Projects</p>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -148,6 +149,7 @@ const Projects = () => {
           })}
         </div>
       )}
+      </div>
     </section>
   );
 };

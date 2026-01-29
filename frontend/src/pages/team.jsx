@@ -261,7 +261,7 @@ const Team = () => {
     const [selectedYear, setSelectedYear] = useState(years[0]);
   
     return (
-    <div id="team" className="relative w-full min-h-screen p-8 overflow-hidden bg-[var(--bg)]">
+    <div id="team" className="relative w-full min-h-screen p-8 overflow-hidden bg-transparent">
       {/* Optional dark overlay for readability */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-black/40 via-black/60 to-black/80 -z-10" />
 

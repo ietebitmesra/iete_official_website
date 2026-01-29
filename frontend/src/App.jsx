@@ -24,7 +24,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-gray-900 text-white flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-purple-800/80 via-black/70 to-blue-800/80 text-white flex flex-col">
       <Navbar />
       <main className="flex-1 pt-16">
         <Routes>
